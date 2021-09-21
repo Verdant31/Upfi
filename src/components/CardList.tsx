@@ -29,7 +29,7 @@ export function CardList({ cards }: CardsProps): JSX.Element {
 
   return (
     <>
-      <SimpleGrid mx="40" columns={3} spacing="20" mt="20">
+      <SimpleGrid columns={3} spacing="60" mt="20">
         {cards.map(card => {
           return (
             <Card
