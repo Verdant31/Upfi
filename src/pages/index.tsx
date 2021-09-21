@@ -43,6 +43,9 @@ export default function Home(): JSX.Element {
       getNextPageParam: lastPage => lastPage.after || null,
     }
   );
+  async function loadImages(): Promise<void> {
+    await fetchNextPage();
+  }
 
   const formattedData = useMemo(() => {
     return data?.pages
@@ -57,12 +60,22 @@ export default function Home(): JSX.Element {
   if (isError) {
     return <Error />;
   }
-  console.log(formattedData);
 
   return (
     <>
       <Header />
-      <CardList cards={formattedData} />
+      <Box maxW={1120} px={20} mx="auto" my={20}>
+        <CardList cards={formattedData} />
+        {hasNextPage && (
+          <Button
+            mt="8"
+            isLoading={isFetchingNextPage}
+            onClick={() => loadImages()}
+          >
+            Carregar mais
+          </Button>
+        )}
+      </Box>
     </>
   );
 }
